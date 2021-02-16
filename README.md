@@ -2,7 +2,9 @@
 A client-server tool for remote LLMNR/NBTNS poisoning by Matt Kiely (HuskyHacks) and Aaron Hobdy.
 
 ## WARNING
-This tool does not yet provide any encryption of data on the wire. **Do not use this to transmit captured NTLM hashes outside of a private, internal network.** The dev team is not liable if you use this in a production environment and leak plain text authentication data out to the Internet.
+This tool does not yet provide any encryption of data on the wire. **Do not use this to transmit captured authentication material outside of a private, internal network.** The dev team is not liable if you use this in a production environment and leak plain text authentication data out to the Internet.
+
+This tool is also not currently built with security best practices in mind. There is no authentication mechanism for the main web server yet. Keep this in mind before hosting this tool on your network. **Never host this on an internet facing server.**
 
 ### Description
 Inveigh is the work of Kevin Robertson and is one of the best tools available for poisoning LLMNR/NBTNS in a target network. Traditionally, tools like Responder.py have been used to respond to LLMNR/NBTNS and force the client to attempt an authentication to the responder server, which allows an attacker to capture the NTLMv2 hash of the client. However, this method has one big shortfall: the attacker must be present on the network where Responder is running, which is not always feasible. Inveigh and InveighZero have the interesting capability of being able to be run via PowerShell or as a reflective .NET assembly, respectively. This allows an operator to gain a foothold with a C2 agent, load Inveigh into their C2 agent's session, and use it to respond to LLMNR on the target network.
