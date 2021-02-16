@@ -1,34 +1,20 @@
 from . import db
 
 
-class Host(db.Model):
-    __tablename__ = "host"
+class Result(db.Model):
+    __tablename__ = "results"
     id = db.Column(db.Integer, primary_key=True)
-    address = db.Column(db.String(128))
-    ntlmv2 = db.relationship('Ntlmv2', backref='host')
-    ntlmv1 = db.relationship('Ntlmv1', backref='host')
-    cleartext = db.relationship('Cleartext', backref='host')
-
-
-class Ntlmv2(db.Model):
-    __tablename__ = "ntlmv2"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(256))
-    hash = db.Column(db.String(256))
-    result_id = db.Column(db.Integer, db.ForeignKey('host.id'))
-
-
-class Ntlmv1(db.Model):
-    __tablename__ = "ntlmv1"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(256))
-    hash = db.Column(db.String(256))
-    result_id = db.Column(db.Integer, db.ForeignKey('host.id'))
-
-
-class Cleartext(db.Model):
-    __tablename__ = "cleartext"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(256))
-    password = db.Column(db.String(256))
-    result_id = db.Column(db.Integer, db.ForeignKey('host.id'))
+    sourceIP = db.Column(db.String(128))
+    sourcePort = db.Column(db.String(128))
+    user = db.Column(db.String(128))
+    host = db.Column(db.String(128))
+    ntlmV2Hash = db.Column(db.String(1024))
+    ntlmV1Hash = db.Column(db.String(1024))
+    clearText = db.Column(db.String(512))
+    protocol = db.Column(db.String(128))
+    protocolPort = db.Column(db.String(128))
+    domain = db.Column(db.String(128))
+    httpType = db.Column(db.String(128))
+    httpPort = db.Column(db.String(128))
+    httpSourceIP = db.Column(db.String(128))
+    httpSourcePort = db.Column(db.String(128))
