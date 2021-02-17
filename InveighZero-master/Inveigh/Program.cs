@@ -230,7 +230,7 @@ namespace Inveigh
 
                         case "-EXFILURL":
                         case "/EXFILURL":
-                            argExfilUrl = args[entry.index + 1].ToUpper();
+                            argExfilUrl = args[entry.index + 1];
                             argFileOutput = "N";
                             break;
 
