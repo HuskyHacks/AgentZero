@@ -1,6 +1,8 @@
 from flask import current_app as app
 from flask import render_template, request
 from .models import db, Result
+import base64
+import json
 
 
 @app.route('/', methods=['GET'])
@@ -13,7 +15,12 @@ def index():
 
 @app.route('/listener', methods=['POST'])
 def listener():
-    content = request.get_json()
+    try:
+        b64content = request.get_data()
+        content = base64.b64decode(b64content).decode("UTF-8")
+        content = json.loads(content)
+    except Exception as e:
+        return str(e), 500
     if content:
         result = Result()
         if 'host' in content:
