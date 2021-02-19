@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends gcc
 
 RUN pip install --upgrade pip
 RUN pip install flake8
+RUN apt install mono-complete
 COPY . /usr/src/app/
 
 COPY ./requirements.txt .

