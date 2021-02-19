@@ -46,6 +46,8 @@ future state
 - [ ] Front end web client for multi-agent config/administration
 - [ ] Dynamic generation for listener URL
 - [ ] "Dashboard" for default view with DAG representation of agents 
+- [ ] Shellcode gen for agent
+
 
 ## Acknowledgements
 The dev team would like to thank Kevin Robertson for making an incredible program! Thanks also goes out to the devs of Covenant, Cobalt Strike, Empire, and all other C2s that we love.
