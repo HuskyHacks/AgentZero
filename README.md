@@ -31,14 +31,21 @@ v.01
 - [x] Flask App
 - [x] Stores in database
 
-future state
+v.02
+- [ ] Encoding/encrypting for exfil
+  - [x] Base64 encoding
+  - [ ] Asymmetrical Key exchange at compilation/agent check in
+- [ ] Simple front-end login, set password on server at docker build
 - [ ] Dynamically compile InveighZero with IP address and port
+  - [x] Compilation function
+  - [ ] Controlled from UI
+
+future state
+- [ ] Cool art for github page
 - [ ] Multi-threaded, multi-agent handling
 - [ ] Front end web client for multi-agent config/administration
 - [ ] Dynamic generation for listener URL
-- [ ] Encoding/encrypting for exfil
-  - [ ] Base64 encoding
-  - [ ] Asymmetrical Key exchange at compilation/agent check in
+- [ ] "Dashboard" for default view with DAG representation of agents 
 
 ## Acknowledgements
 The dev team would like to thank Kevin Robertson for making an incredible program! Thanks also goes out to the devs of Covenant, Cobalt Strike, Empire, and all other C2s that we love.
