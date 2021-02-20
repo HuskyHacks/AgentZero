@@ -3,10 +3,22 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 RUN apt-get update && apt-get install -y --no-install-recommends gcc
+RUN apt-get update && apt-get install -y gnupg2
+
+# Installing Mono-Complete
+RUN apt-get update -q
+RUN apt-get -y -q install wget
+RUN wget http://download.mono-project.com/repo/xamarin.gpg
+RUN apt-key add xamarin.gpg
+RUN rm xamarin.gpg
+RUN echo "deb http://download.mono-project.com/repo/debian wheezy main" > /etc/apt/sources.list.d/mono-xamarin.list
+RUN apt-get update -q
+RUN apt-get -y -q install mono-complete
+
 
 RUN pip install --upgrade pip
 RUN pip install flake8
-RUN apt install mono-complete
+
 COPY . /usr/src/app/
 
 COPY ./requirements.txt .

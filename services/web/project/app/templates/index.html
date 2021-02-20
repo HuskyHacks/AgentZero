@@ -2,10 +2,21 @@
 
 {% block content %}
 <div>
-  Welcome to AgentZero <br><br>
+  Welcome to AgentZero <br>
+
+  <h1>Capture Info</h1>
+
   {% for result in results %}
-    Hostname: {{result.host }} <br>
-    Source IP: {{result.sourceIP }}<br>
+  <h2> Result </h2>
+    Hostname: {{ result.host }} <br>
+    Internal IP: {{ result.sourceIP }}<br>
+    User: {{result.user }}<br>
+    NTLMv1 Hash: {{ result.ntlmV1Hash }} <br>
+    NTLMv2 Hash: {{ result.ntlmV2Hash }}<br>
+    Domain: {{ result.domain }}<br>
+  <br>
+
   {% endfor %}
 </div>
+
 {% endblock %}
