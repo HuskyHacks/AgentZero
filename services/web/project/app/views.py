@@ -63,3 +63,8 @@ def listener():
 
     else:
         return render_template('listener.html')
+
+
+@app.route('/agents', methods=['GET', 'POST'])
+def createAgent():
+    return render_template('agents.html')
