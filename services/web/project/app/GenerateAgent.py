@@ -4,6 +4,7 @@ import string
 import random
 import zipfile
 import shutil
+from time import sleep
 
 
 def create_agent(ip, port, inveigh):
@@ -24,7 +25,7 @@ def create_agent(ip, port, inveigh):
     p2 = Popen(cmd2.split(), stdin=p1.stdout, stdout=PIPE)
     p2.communicate()
     # COMPILE WITH MONO (REQUIRES PACKAGE MONO-COMPLETE TO BE INSTALLED)
-    cmd = "xbuild Inveigh.sln"
+    cmd = "xbuild /p:Configuration=Release Inveigh.sln"
     p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
     p.communicate()
 
@@ -39,10 +40,8 @@ def agentNameGenerator(size):
 
 
 def moveAndRename(agentName):
-    print("Moving...")
-    shutil.move("/home/husky/Desktop/AgentZero/Inveigh/InveighZero-master/Inveigh/bin/Debug/Inveigh.exe",
+    shutil.move("/home/husky/Desktop/AgentZero/Inveigh/Inveigh/bin/Release/Inveigh.exe",
                 "/home/husky/Desktop/AgentZero/services/web/project/app/agents/{0}.exe".format(agentName))
-    print("Deleting...")
     shutil.rmtree('/home/husky/Desktop/AgentZero/Inveigh')
 
 

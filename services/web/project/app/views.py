@@ -1,9 +1,11 @@
 import flask
+from flask import *
 from flask import current_app as app
 from flask import render_template, request
 from .models import db, Result
 import base64
 import json
+import os
 
 
 @app.route('/', methods=['GET'])
@@ -54,6 +56,9 @@ def listener():
             if 'clearText' in content:
                 result.clearText = content['clearText']
             try:
+                # TODO: if the hash already exists, don't write to DB
+                # repeat = db.session.query(result).first()
+                # if not repeat:
                 db.session.add(result)
                 db.session.commit()
             except Exception as e:
@@ -68,3 +73,16 @@ def listener():
 @app.route('/agents', methods=['GET', 'POST'])
 def createAgent():
     return render_template('agents.html')
+
+
+# TODO: Download function returns all agents in /agents dir. Need to figure out how to get an agent from the /agents
+#  dir into dockerland because the app doesn't know about the /agents dir
+@app.route('/return-files/', methods=['GET', 'POST'])
+def return_files_tut():
+    try:
+        directory = "/home/app/web"
+        for filename in os.listdir(directory):
+            files = os.path.join(directory, filename)
+            return files
+    except Exception as e:
+        return str(e), 500
