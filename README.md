@@ -48,7 +48,13 @@ future state
 - [ ] Dynamic generation for listener URL
 - [ ] "Dashboard" for default view with DAG representation of agents 
 - [ ] Shellcode gen for agent
-
+- [ ] Basic command execution
+- [ ] Malleable C2
 
 ## Acknowledgements
 The dev team would like to thank Kevin Robertson for making an incredible program! Thanks also goes out to the devs of Covenant, Cobalt Strike, Empire, and all other C2s that we love.
+
+## Disclaimer
+There is no way to make an offensive security relevant research tool and release it open source without the possibility of it falling into the wrong hands. **This tool is only to be used for legal, ethical purposes including, but not limited to, research, security assessment, education. The dev team is not responsible for the misuse of this tool by anyone if used for illegal/unethical purposes.**
+
+The graphic work in this repository is fan art. Likeness to real-world copyrighted material should not be inferred. No animals were harmed in the making of this code base (although Cosmo keeps climbing on my keyboard and I have to put him over on the couch, which I'm sure must feel like torture to him).
