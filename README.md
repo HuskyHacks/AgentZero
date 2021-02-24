@@ -1,3 +1,9 @@
+![GitHub Repo stars](https://img.shields.io/github/stars/HuskyHacks/AgentZero?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/HuskyHacks/AgentZero)
+![GitHub](https://img.shields.io/github/license/HuskyHacks/AgentZero)
+![GitHub language count](https://img.shields.io/github/languages/count/HuskyHacks/AgentZero)
+![GitHub top language](https://img.shields.io/github/languages/top/huskyHacks/AgentZero)
+
 # AgentZero
 A client-server tool for remote LLMNR/NBTNS poisoning by Matt Kiely (HuskyHacks) and Aaron Hobdy.
 
