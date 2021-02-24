@@ -14,7 +14,8 @@ Recently, we found that we were running Inveigh as a .NET assembly through a C2 
 **AgentZero** uses a modified version of the InveighZero source code to create an agent binary that can exfiltrate capture authentication messages from an internal network out to an operator-controlled server. This allows for remote LLMNR poisoning that can recover cryptographic authentication messages.  
 
 ### Quick Install Guide
-Note: The process for setting up the client/server architecture for this tool is still in its early stages. Right now, the InveighZero agent must be compiled manually.
+
+UNDER CONSTRUCTION
 
 1. `sudo git clone https://github.com/HuskyHacks/AgentZero.git`
 2. `cd AgentZero`
