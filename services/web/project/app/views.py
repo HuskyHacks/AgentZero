@@ -6,6 +6,23 @@ from .models import db, Result
 import base64
 import json
 import os
+from .GenerateAgent import *
+from flask_nav import Nav
+from flask_nav.elements import Navbar, View
+
+DOWNLOAD_DIRECTORY = "/home/app/web/project/app/agents/"
+
+nav = Nav()
+
+
+@nav.navigation()
+def mynavbar():
+    return Navbar(
+        'AgentZero',
+        View('Home', 'index'),
+        View('Listener', 'listener'),
+        View('Agents', 'createAgent')
+    )
 
 
 @app.route('/', methods=['GET'])
@@ -15,6 +32,8 @@ def index():
     results = Result.query.all()
     return render_template('index.html', title="AgentZero", results=results)
 
+
+# TODO: Listener name generation matches Agent name generation
 
 @app.route('/listener', methods=['GET', 'POST'])
 def listener():
@@ -65,24 +84,35 @@ def listener():
                 return str(e), 500
             return "OK", 200
         return "MESSAGE: {0}".format(request.is_json)
-
     else:
         return render_template('listener.html')
 
 
+# TODO: Download function returns all agents in /agents dir.
+@app.route('/return-files/', methods=['GET', 'POST'])
+def list_files():
+    """Endpoint to list files on the server."""
+    files = []
+    for filename in os.listdir(DOWNLOAD_DIRECTORY):
+        path = os.path.join(DOWNLOAD_DIRECTORY, filename)
+        if os.path.isfile(path):
+            files.append(filename)
+    return jsonify(files)
+
+
+@app.route("/files/<path:path>")
+def get_file(path):
+    return send_from_directory(DOWNLOAD_DIRECTORY, path, as_attachment=True)
+
+
+# TODO: agent generation
 @app.route('/agents', methods=['GET', 'POST'])
 def createAgent():
-    return render_template('agents.html')
+    #    if flask.request.method == 'POST':
+    #        create_agent("10.10.1.149", "1776", "/home/app/web/project/app/static/")
+    #        moveAndRename(agentNameGenerator(8))
+    #    else:
+    return render_template('agents.html'), 200
 
 
-# TODO: Download function returns all agents in /agents dir. Need to figure out how to get an agent from the /agents
-#  dir into dockerland because the app doesn't know about the /agents dir
-@app.route('/return-files/', methods=['GET', 'POST'])
-def return_files_tut():
-    try:
-        directory = "/home/app/web"
-        for filename in os.listdir(directory):
-            files = os.path.join(directory, filename)
-            return files
-    except Exception as e:
-        return str(e), 500
+nav.init_app(app)

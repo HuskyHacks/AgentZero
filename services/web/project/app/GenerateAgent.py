@@ -6,7 +6,11 @@ import zipfile
 import shutil
 
 
-# TODO: make sure all of the directories are reletive to the /AgentZero dir location, remove all explicit pathing
+# TODO: Listener name generation matches Agent name generation
+
+# TODO: Integrate crypto key gen into Agent gen. Agent can only send data if it has the correct public key. Priv key
+#  is generated for each listener
+
 def create_agent(ip, port, inveigh):
     # FORMAT URL FOR FLASK LISTENER
     url = "http://{0}:{1}/listener".format(ip, port)
@@ -29,7 +33,7 @@ def create_agent(ip, port, inveigh):
     #  for msbuild.
 
     #  COMPILE WITH MONO (REQUIRES PACKAGE MONO-COMPLETE TO BE INSTALLED)
-    cmd = "xbuild /p:Configuration=Release Inveigh.sln"
+    cmd = "xbuild /p:Configuration=Release /home/app/web/project/app/static/Inveigh/Inveigh.sln"
     p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
     p.communicate()
 
@@ -43,14 +47,7 @@ def agentNameGenerator(size):
     return agentName
 
 
-# TODO: make all of these reletive paths
 def moveAndRename(agentName):
-    shutil.move("/home/husky/Desktop/AgentZero/Inveigh/Inveigh/bin/Release/Inveigh.exe",
-                "/home/husky/Desktop/AgentZero/services/web/project/app/agents/{0}.exe".format(agentName))
-    shutil.rmtree('/home/husky/Desktop/AgentZero/Inveigh')
-
-
-# TODO: dynamically set IP address and Inveigh dir
-if __name__ == '__main__':
-    create_agent("10.10.1.149", "1776", "/home/husky/Desktop/AgentZero/")
-    moveAndRename(agentNameGenerator(8))
+    shutil.move("/home/app/web/project/app/static/Inveigh/Inveigh/bin/Release/Inveigh.exe",
+                "/home/app/web/project/app/agents/{0}.exe".format(agentName))
+    shutil.rmtree('/home/app/web/project/app/static/Inveigh')

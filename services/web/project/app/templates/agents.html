@@ -12,10 +12,17 @@
 
         <h1>Agents</h1>
 
-            <body class="body">
+         {% for files in files %}
+           Name: {{ files.filename }} <br>
+         {% endfor %}
+         <br>
+
+<body class="body">
+<form action="" method="post">
                <div class="container" align="left">
                     <a href="/return-files/" target="blank"><button class='btn btn-default'>Download!</button></a>
                </div>
+            </form>
             </body>
 
         {% endblock %}

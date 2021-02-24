@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="static/css/style.css" />
     <title>{{title}}</title>
 </head>
+{% block navbar %}
+{{nav.mynavbar.render()}}
+{% endblock %}
   <body>
  
     {% block content %}
