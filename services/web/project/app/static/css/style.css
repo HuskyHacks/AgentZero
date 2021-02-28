@@ -6,39 +6,226 @@ body {
   font-variant: small-caps;
 }
 
-.page-container {
-  width: 100%;
-  height: 100%;
+/* LAYOUT */
+.floating-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
 }
 
-.login-container {
-  width: 100%;
+.menu {
+  position: relative;
+  overflow: hidden;
+  width: 20%;
   height: 100%;
+  float: left;
   text-align: center;
+  background: #909090;
+  z-index: 500;
+}
+
+.page-content {
+  margin-left: 20%;
+  height: 100%;
+  background: #F2F2F2;
+  overflow: hidden;
+}
+
+.top {
+  height: 10%;
+  width: 100%;
+  border-bottom: 2px solid #CCC;
+}
+
+#slide {
+  width: 25%;
+  height: 100%;
+  background-color: #C2C2C2;
+  opacity: 0;
+  transition: all .75s ease;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+.bottom {
+  height: 90%;
+  width: 100%;
+}
+
+/* NAV MENU */
+.site-title {
+  margin-top: 20px;
+  font-size: 30px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FFFFFF;
+}
+
+.nav {
+  position: relative;
+  margin: 0 10px;
+  text-align: right;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav ul li {
+  position: relative;
+  margin: 1.2em 0;
+}    
+
+.nav ul li a {
+  line-height: 5em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  color: #CCC;
+  display: block;
+  transition: all ease-out 300ms;
+}
+
+.nav ul li.active a {
+  color: white;
+}
+
+.nav ul li a:hover {
+  color: orange;
+}
+
+.nav ul li:not(.active)::after {
+  opacity: 0.2;
+}
+
+.nav ul li::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.2em;
+  background: white;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #606060, #FFF)
+}
+
+/* TOP BAR */
+
+.user-info {
+  height: 100%;
+  float: right;
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+}
+
+.user-icon {
+  width: 25px;
+  height: 25px;
+  margin: 0px 5px;
+  background: #909090;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-down {
+  border: solid #909090;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/* LOGIN PAGE */
+
+.login-container {
+  width: 100%;;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.circle1 {
+  border-radius: 50%;
+  border: 2px solid white;
+  width: 330px;
+  height: 330px;
+  position: absolute;
+  opacity: 0;
+  animation: scaleIn 2s infinite cubic-bezier(.36, .11, .89, .32);
+}
+
+.circle2 {
+  border-radius: 50%;
+  border: 2px solid white;
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  opacity: 0;
+  animation: scaleIn 2s infinite cubic-bezier(.36, .11, .89, .32);
+}
+
+.item {
+  z-index: 100;
+  padding: 5px;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(1, 1);
+    opacity: .5;
+  }
+  to {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
 }
 
 .login-title {
-  height: 100px;
-  font-size: 60px;
+  position: absolute;
   text-align: center;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index 9;
+  font-size: 60px;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: orange;
+  -webkit-text-stroke-color: #FFFFFF;
 }
 
 .login {
   background: #F7F7F7;
   border-radius: 50%;
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   margin: auto;
+  z-index: 100;
   text-align: center;
-  line-height: 400px;
+  line-height: 300px;
   box-shadow: 8px 8px 8px 8px #BFBFBF, -8px -8px 8px 8px #FFFFFF;
 }
 
 .login-form {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,4 +271,28 @@ body {
 
 .login-btn:hover {
   background-color: orange;
+}
+
+/* AGENTS */
+.download {
+  text-transform: uppercase;
+  height: 40px;
+  width: 95%;
+  margin: 5px 5px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #CCC;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* HOME */
+.agent-logo {
+  width: 100%;
+  height: 100%;
+  opacity: .2;
+  background-image: url("agent_logo_transparent.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }

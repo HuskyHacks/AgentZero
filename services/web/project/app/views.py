@@ -3,7 +3,6 @@ from flask import *
 from flask import current_app as app
 from flask import render_template, request
 from werkzeug.security import check_password_hash
-
 from .models import db, Result, User
 from flask import send_from_directory
 import base64
