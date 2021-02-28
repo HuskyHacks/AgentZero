@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="page-container">
+     <div class="login-container">
+       <div class="login-title">
+         AgentZero
+       </div>
+       <div class="login">
+         <form action="" method="post">
+           <div class="login-form">
+             <table>
+              <tr>
+               <td><input class="login-input" type="text" placeholder="Username" name="username"></td>
+              </tr>
+              <tr>
+               <td><input class="login-input" type="password" placeholder="Password" name="password"></td>
+              </tr>
+              <tr>
+               <td><button class="login-btn" type="submit">Login</button></td>
+              </tr>
+                 <tr>
+                     <br>
+                 {% if error %}
+                    <p class="error"><strong>Error:</strong> {{ error }}
+                {% endif %}
+                    </tr>
+           </div>
+         </form>
+       </div>
+     <div>
+   </div>
+
+
+{% endblock %}
