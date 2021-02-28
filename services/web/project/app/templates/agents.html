@@ -6,13 +6,37 @@
 {{nav.mynavbar.render()}}
 {% endblock %}
 
-        {% block body %}
+{% block body %}
 
-        <h1>Create Agent</h1>
-            <br>
-            <body class="body">
-            Coming soon!
-            </body>
+<h1>Create Agent</h1>
+    <br>
+    <body class="body">
+
+    <div>
+        <form action="" method="post">
+            <div>
+                <table>
+                    <tr>
+                    <td><input class="form-input" type="text" placeholder="Listener IP" name="listenerIP" required="true"></td>
+                    </tr>
+                    <tr>
+                    <td><input class="form-input" type="text" placeholder="Listener Port" name="listenerPort" required="true"></td>
+                    </tr>
+                    <tr>
+                    <td><button class="form-btn" type="submit">Create Agent</button></td>
+                    </tr>
+                    <tr>
+                    {% if error %}
+                    <p class="error"><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+
+
+</body>
 
         <h1>Agents</h1>
 
@@ -21,14 +45,12 @@
          {% endfor %}
          <br>
 
-<body class="body">
-<form action="" method="post">
-               <div class="container" align="left">
-                    <a href="/return-files/" target="blank"><button class='btn btn-default'>Download!</button></a>
-               </div>
-            </form>
-            </body>
-
-        {% endblock %}
-
-    {% endblock %}
+        <body class="body">
+        <form action="" method="post">
+            <div class="container" align="left">
+                <a href="/return-files/" target="blank"><button class='btn btn-default'>Download!</button></a>
+            </div>
+        </form>
+    </body>
+{% endblock %}
+{% endblock %}

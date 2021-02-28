@@ -44,10 +44,6 @@ def login():
         return render_template('login.html')
 
 
-
-
-
-
 @app.route('/home', methods=['GET'])
 @app.route('/index.html', methods=['GET'])
 def index():
@@ -119,7 +115,6 @@ def listener():
 # TODO: Download function returns all agents in /agents dir.
 @app.route('/return-files/', methods=['GET', 'POST'])
 def list_files():
-    """Endpoint to list files on the server."""
     files = []
     for filename in os.listdir(DOWNLOAD_DIRECTORY):
         path = os.path.join(DOWNLOAD_DIRECTORY, filename)
@@ -136,11 +131,18 @@ def get_file(path):
 # TODO: agent generation
 @app.route('/agents', methods=['GET', 'POST'])
 def createAgent():
-    #    if flask.request.method == 'POST':
-    #        create_agent("10.10.1.149", "1776", "/home/app/web/project/app/static/")
-    #        moveAndRename(agentNameGenerator(8))
-    #    else:
-    return render_template('agents.html'), 200
+    if flask.request.method == 'POST':
+        try:
+            listenerIP = request.form.get('listenerIP')
+            listenerPort = request.form.get('listenerPort')
+            inveighPath = "/home/app/web/project/app/static/"
+            create_agent(listenerIP, listenerPort, inveighPath)
+            moveAndRename(agentNameGenerator(8))
+            return render_template('agents.html'), 200
+        except Exception as e:
+            return str(e), 500
+    else:
+        return render_template('agents.html'), 200
 
 
 @app.route('/favicon.ico')

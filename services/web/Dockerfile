@@ -42,5 +42,6 @@ COPY ./entrypoint.sh $APP_HOME
 COPY . $APP_HOME
 RUN chown -R app:app $APP_HOME
 RUN apt-get install -y mono-xbuild
+RUN apt-get install -y mono-complete
 USER app
 ENTRYPOINT ["/home/app/web/entrypoint.sh"]
