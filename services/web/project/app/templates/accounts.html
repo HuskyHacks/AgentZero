@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block navbar %}
+{{nav.mynavbar.render()}}
+{% endblock %}
+  <div>
+
+    {% for user in users %}
+    <h2> Accounts </h2>
+      Username: {{ user.username }} <br>
+    <br>
+    {% endfor %}
+  </div>
+{% endblock %}

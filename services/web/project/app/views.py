@@ -2,13 +2,17 @@ import flask
 from flask import *
 from flask import current_app as app
 from flask import render_template, request
-from .models import db, Result
+from werkzeug.security import check_password_hash
+
+from .models import db, Result, User
+from flask import send_from_directory
 import base64
 import json
 import os
 from .GenerateAgent import *
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
+from passlib.hash import sha256_crypt
 
 DOWNLOAD_DIRECTORY = "/home/app/web/project/app/agents/"
 
@@ -21,16 +25,41 @@ def mynavbar():
         'AgentZero',
         View('Home', 'index'),
         View('Listener', 'listener'),
-        View('Agents', 'createAgent')
+        View('Agents', 'createAgent'),
+        View('Accounts', 'accounts')
     )
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if flask.request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).first()
+
+        if not user or not check_password_hash(user.password, password):
+            error = "Please check your login details and try again."
+            return render_template('login.html', error=error)
+        return redirect(url_for('index'))
+    else:
+        return render_template('login.html')
+
+
+
+
+
+
 @app.route('/home', methods=['GET'])
 @app.route('/index.html', methods=['GET'])
 def index():
     results = Result.query.all()
     return render_template('index.html', title="AgentZero", results=results)
+
+
+@app.route('/accounts.html', methods=['GET'])
+def accounts():
+    users = User.query.all()
+    return render_template('accounts.html', title="AgentZero", users=users)
 
 
 # TODO: Listener name generation matches Agent name generation
@@ -113,6 +142,12 @@ def createAgent():
     #        moveAndRename(agentNameGenerator(8))
     #    else:
     return render_template('agents.html'), 200
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 nav.init_app(app)

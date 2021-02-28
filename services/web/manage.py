@@ -1,8 +1,10 @@
 from flask.cli import FlaskGroup
 from project import app
 from project.app import db
-from project.app.models import Result
-
+from project.app.models import Result, User
+import werkzeug
+from passlib.hash import sha256_crypt
+from werkzeug.security import generate_password_hash
 
 cli = FlaskGroup(app)
 
@@ -15,6 +17,17 @@ def create_db():
         db.session.commit()
     except Exception as e:
         print(str(e))
+
+
+@cli.command("default_user")
+def default_user():
+    user = User()
+    user.username = "admin"
+    DEFAULTPASSWORD = "admin"
+    ct_pass = werkzeug.security.generate_password_hash(DEFAULTPASSWORD, method='pbkdf2:sha256', salt_length=8)
+    user.password = ct_pass
+    db.session.add(user)
+    db.session.commit()
 
 
 @cli.command("seed_db")
