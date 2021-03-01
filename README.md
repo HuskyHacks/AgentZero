@@ -1,3 +1,5 @@
+<p align="center">
+
 ![GitHub Repo stars](https://img.shields.io/github/stars/HuskyHacks/AgentZero?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/HuskyHacks/AgentZero)
 ![GitHub](https://img.shields.io/github/license/HuskyHacks/AgentZero)
