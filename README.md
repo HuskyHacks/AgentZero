@@ -43,7 +43,7 @@ v.02
   - [x] Base64 encoding
   - [ ] Asymmetrical Key exchange at compilation/agent check in
 - [ ] Simple front-end login, set password on server at docker build
-    -[ ] Server handles sessions, login actually functions
+    - [ ] Server handles sessions, login actually functions
 - [x] Dynamically compile InveighZero with IP address and port
   - [x] Compilation function
   - [x] Controlled from UI
