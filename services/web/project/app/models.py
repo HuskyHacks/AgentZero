@@ -1,6 +1,14 @@
 from . import db
 
 
+class Agent(db.Model):
+    __tablename__ = "agents"
+    id = db.Column(db.Integer, primary_key=True)
+    agentName = db.Column(db.String(128))
+    listenerIP = db.Column(db.String(128))
+    listenerPort = db.Column(db.String(128))
+
+
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)

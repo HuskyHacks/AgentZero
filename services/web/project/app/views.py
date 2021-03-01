@@ -12,6 +12,7 @@ from .GenerateAgent import *
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from passlib.hash import sha256_crypt
+from .models import Agent
 
 DOWNLOAD_DIRECTORY = "/home/app/web/project/app/agents/"
 
@@ -113,22 +114,13 @@ def listener():
 
 
 # TODO: Download function returns all agents in /agents dir.
-@app.route('/return-files/', methods=['GET', 'POST'])
-def list_files():
-    files = []
-    for filename in os.listdir(DOWNLOAD_DIRECTORY):
-        path = os.path.join(DOWNLOAD_DIRECTORY, filename)
-        if os.path.isfile(path):
-            files.append(filename)
-    return jsonify(files)
 
-
-@app.route("/files/<path:path>")
+@app.route("/return-files/<path:path>")
 def get_file(path):
     return send_from_directory(DOWNLOAD_DIRECTORY, path, as_attachment=True)
 
 
-# TODO: agent generation
+# TODO: agent generation - add to database
 @app.route('/agents', methods=['GET', 'POST'])
 def createAgent():
     if flask.request.method == 'POST':
@@ -143,6 +135,16 @@ def createAgent():
             return str(e), 500
     else:
         return render_template('agents.html'), 200
+
+
+@app.route('/return-files/')
+def list_agents():
+    agents = []
+    for file in os.listdir(DOWNLOAD_DIRECTORY):
+        path = os.path.join(DOWNLOAD_DIRECTORY, file)
+        if os.path.isfile(path):
+            agents.append(file)
+        return jsonify(agents)
 
 
 @app.route('/favicon.ico')
